@@ -4,17 +4,16 @@ require 'Slim/Slim.php';
 
 $app = new Slim();
 
-$app->get('/wines', 'getWines');
-$app->get('/wines/:id',	'getWine');
-$app->get('/wines/search/:query', 'findByName');
-$app->post('/wines', 'addWine');
-$app->put('/wines/:id', 'updateWine');
-$app->delete('/wines/:id',	'deleteWine');
+$app->get('/todos', 'getTodos');
+$app->get('/todos/:id',	'getTodo');
+$app->post('/todos', 'addTodo');
+$app->put('/todos/:id', 'updateTodo');
+$app->delete('/todos/:id',	'deleteTodo');
 
 $app->run();
 
-function getWines() {
-	$sql = "select * FROM wine ORDER BY name";
+function getTodos() {
+	$sql = "select * FROM todo ORDER BY name";
 	try {
 		$db = getConnection();
 		$stmt = $db->query($sql);  
@@ -27,8 +26,8 @@ function getWines() {
 	}
 }
 
-function getWine($id) {
-	$sql = "SELECT * FROM wine WHERE id=:id";
+function getTodo($id) {
+	$sql = "SELECT * FROM todo WHERE id=:id";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);  
@@ -42,20 +41,16 @@ function getWine($id) {
 	}
 }
 
-function addWine() {
-	error_log('addWine\n', 3, '/var/tmp/php.log');
+function addTodo() {
+	error_log('addTodo\n', 3, '/var/tmp/php.log');
 	$request = Slim::getInstance()->request();
 	$wine = json_decode($request->getBody());
-	$sql = "INSERT INTO wine (name, grapes, country, region, year, description) VALUES (:name, :grapes, :country, :region, :year, :description)";
+	$sql = "INSERT INTO todo (description, status) VALUES (:description, :status)";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("name", $wine->name);
-		$stmt->bindParam("grapes", $wine->grapes);
-		$stmt->bindParam("country", $wine->country);
-		$stmt->bindParam("region", $wine->region);
-		$stmt->bindParam("year", $wine->year);
 		$stmt->bindParam("description", $wine->description);
+		$stmt->bindParam("status", $wine->status);
 		$stmt->execute();
 		$wine->id = $db->lastInsertId();
 		$db = null;
@@ -66,20 +61,16 @@ function addWine() {
 	}
 }
 
-function updateWine($id) {
+function updateTodo($id) {
 	$request = Slim::getInstance()->request();
 	$body = $request->getBody();
 	$wine = json_decode($body);
-	$sql = "UPDATE wine SET name=:name, grapes=:grapes, country=:country, region=:region, year=:year, description=:description WHERE id=:id";
+	$sql = "UPDATE todo SET description=:description, status=:status WHERE id=:id";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);  
-		$stmt->bindParam("name", $wine->name);
-		$stmt->bindParam("grapes", $wine->grapes);
-		$stmt->bindParam("country", $wine->country);
-		$stmt->bindParam("region", $wine->region);
-		$stmt->bindParam("year", $wine->year);
 		$stmt->bindParam("description", $wine->description);
+		$stmt->bindParam("status", $wine->status);
 		$stmt->bindParam("id", $id);
 		$stmt->execute();
 		$db = null;
@@ -89,8 +80,8 @@ function updateWine($id) {
 	}
 }
 
-function deleteWine($id) {
-	$sql = "DELETE FROM wine WHERE id=:id";
+function deleteTodo($id) {
+	$sql = "DELETE FROM todo WHERE id=:id";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);  
@@ -102,32 +93,15 @@ function deleteWine($id) {
 	}
 }
 
-function findByName($query) {
-	$sql = "SELECT * FROM wine WHERE UPPER(name) LIKE :query ORDER BY name";
-	try {
-		$db = getConnection();
-		$stmt = $db->prepare($sql);
-		$query = "%".$query."%";  
-		$stmt->bindParam("query", $query);
-		$stmt->execute();
-		$wines = $stmt->fetchAll(PDO::FETCH_OBJ);
-		$db = null;
-		echo json_encode($wines);
-	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
-	}
-}
 
 function getConnection() {
 	$dbhost="127.0.0.1";
 	$dbuser="root";
-	$dbpass="";
-	$dbname="cellar";
+	$dbpass="abc123";
+	$dbname="todo";
 	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);	
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	return $dbh;
 }
-
-echo "hello world"
 
 ?>
