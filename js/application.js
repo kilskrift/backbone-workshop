@@ -8,4 +8,13 @@ var myTodo = new Todo({
 });
 
 // create todo view
+var TodoView = Backbone.View.extend({
+	render: function(){
+		var html = "rendered by myTodoView";
+		$(this.el).html(html);
+	}
+});
+
+var myTodoView = new TodoView({});
+
 
