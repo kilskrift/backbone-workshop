@@ -16,12 +16,16 @@ Put the api application somewhere on your machine. Make sure it can be accessed 
 
 2. Setup & populate the todo database:
 
-Create a MySQL database name "todo" using your prefered method (phpmyadmin?).
+Create a MySQL database name "todos" using your prefered method (phpmyadmin?).
 
 Execute todo.sql to create and populate the "todo" table.
 (Remember to insert your mysql root user password with the -p flag):
 
   mysql todos -uroot -ppassword < todo.sql
+
+Alternatively, select the database todos in i.e. phpmyadmin, and import the sql dump in todo.sql.
+
+You should now have a table "todo" in the database "todos".
 
 Also, edit index.php getConnection() to use the same user credentials.
 

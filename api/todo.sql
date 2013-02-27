@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 12:30 PM
+-- Generation Time: Feb 27, 2013 at 02:22 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.15
 
@@ -39,10 +39,9 @@ CREATE TABLE IF NOT EXISTS `todo` (
 
 INSERT INTO `todo` (`id`, `description`, `status`) VALUES
 (1, 'Intro till backbone', 'incomplete'),
-(2, 'Gå igenom Anatomy of Backbone.js på codeschool', 'incomplete'),
-(3, 'Sätt upp lokal backend.', 'incomplete'),
-(4, 'Gör om lession 1 lokalt', 'incomplete'),
-(5, 'Gå vidare med övriga lektioner', 'incomplete');
+(2, 'Do Anatomy of Backbone.js from oncodeschool', 'incomplete'),
+(3, 'Set up lokal backend.', 'incomplete'),
+(4, 'Redo lession 1 locally', 'incomplete');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

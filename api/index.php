@@ -2,12 +2,10 @@
 
 require 'Slim/Slim.php';
 
-$app = new Slim( array( 'debug' => true ) );
+$app = new Slim();
 
 $app->config('debug', true);
-$app->get('/', function() {
-	echo 'Hello world';
-});
+
 
 
 // unless we have url rewriting, these match i.e. http://localhost/~kgm/api/index.php</todos>
