@@ -21,7 +21,7 @@ Create a MySQL database name "todo" using your prefered method (phpmyadmin?).
 Execute todo.sql to create and populate the "todo" table.
 (Remember to insert your mysql root user password with the -p flag):
 
-  mysql todo -uroot -ppassword < todo.sql
+  mysql todos -uroot -ppassword < todo.sql
 
 Also, edit index.php getConnection() to use the same user credentials.
 
