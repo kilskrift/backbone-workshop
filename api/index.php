@@ -18,7 +18,7 @@ $app->delete('/todos/:id',	'deleteTodo');
 $app->run();
 
 function getTodos() {
-	$sql = "select * FROM todo ORDER BY description";
+	$sql = "select * FROM todo ORDER BY id";
 	try {
 		$db = getConnection();
 		$stmt = $db->query($sql);  
