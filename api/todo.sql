@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS `todo` (
 --
 
 INSERT INTO `todo` (`id`, `description`, `status`) VALUES
-(1, 'Intro till backbone', 'incomplete'),
-(2, 'Do Anatomy of Backbone.js from oncodeschool', 'incomplete'),
-(3, 'Set up lokal backend.', 'incomplete'),
+(1, 'Intro to backbone', 'incomplete'),
+(2, 'Do Anatomy of Backbone.js from codeschool', 'incomplete'),
+(3, 'Set up local backend.', 'incomplete'),
 (4, 'Redo lession 1 locally', 'incomplete');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

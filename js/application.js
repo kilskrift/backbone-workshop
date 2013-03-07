@@ -13,6 +13,7 @@ var myTodoNo1 = new Todo({
 	id: 1	
 });
 
+// change event triggers on model update, i.e. on fetch()
 myTodoNo1.on('change', function(){
 	alert( this.get('description') );
 });
