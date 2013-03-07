@@ -1,0 +1,29 @@
+För att få installationen att fungera med PHP/Slim framework för API:et
+
+Behöver använda/aktivera mod_rewrite för att alla referenser till filer som inte finns i sökvägen skall skickas vidare till api/index.php, där slim route:ar dem till respektive funktion (REST)
+
+För att sätta upp mod_rewrite för bara vår apps api, vill vi begränsa ändringar via .htaccess till en viss virtual host.
+
+För att sätta upp en virtual host i OSX Lions standardinstallation av apache:
+(se https://discussions.apple.com/thread/3216810 för bra information)
+
+lägg till en rad i /etc/hosts:
+127.0.0.1 	bbws.com
+
+avkommentera modulen för virtual hosts i /etc/apache2/httpd.conf
+Include /private/etc/apache2/extra/httpd-vhosts.conf
+
+editera /etc/apache2/extra/httpd-vhosts.conf och lägg till en virtual host för backbone-workshop, lägg också till en directory-listning för backbone-workshop som tillåter oss att specificiera tillägg via .htaccess (AllowOverride All)
+<VirtualHost *:80>
+  	DocumentRoot "/Users/kgm/Sites/backbone-workshop"
+  	ServerName bbws.com
+	
+	<Directory "/Users/kgm/Sites/backbone-workshop/api">
+	    AllowOverride All
+        Order allow,deny
+        Allow from all	    
+	</Directory>
+</VirtualHost>
+
+starta om apache med 
+sudo apachectl restart

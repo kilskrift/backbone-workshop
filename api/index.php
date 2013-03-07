@@ -10,8 +10,10 @@ $app->config('debug', true);
 
 // unless we have url rewriting, these match i.e. http://localhost/~kgm/api/index.php</todos>
 $app->get('/todos', 'getTodos');
+$app->get('/todos/', 'getTodos');
 $app->get('/todos/:id',	'getTodo');
 $app->post('/todos', 'addTodo');
+$app->post('/todos/', 'addTodo');
 $app->put('/todos/:id', 'updateTodo');
 $app->delete('/todos/:id',	'deleteTodo');
 
