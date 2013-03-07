@@ -27,3 +27,6 @@ editera /etc/apache2/extra/httpd-vhosts.conf och lägg till en virtual host för
 
 starta om apache med 
 sudo apachectl restart
+
+ev. måste FollowSymlinks aktiveras i api/.htaccess för att skriva om url, det syns i apaches error.log
+Options +FollowSymlinks
